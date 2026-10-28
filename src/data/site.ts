@@ -1,12 +1,11 @@
 export const siteSettings = {
-	brandName: "WuppyCMS",
-	tagline: "Git tabanlı içerik yönetimi",
-	description:
-		"Astro sitenizi GitHub deposuna bağlayan, AI ile içerik düzenlemenizi sağlayan ve her değişikliği gerçek bir commit olarak saklayan içerik yönetim sistemi.",
-	email: "merhaba@wuppycms.dev",
+	brandName: "port",
+	tagline: "Portfolio · Bold",
+	description: "A minimal photography portfolio for a documentary photographer, with a project gallery, about page and contact.",
+	email: "hello@example.com",
 	location: "İstanbul, Türkiye",
 	workHours: "Hafta içi 09:00 – 18:00",
-	github: "https://github.com/reeyai",
+	github: "https://github.com/fuatcangnc/testport",
 };
 
 export const navItems = [

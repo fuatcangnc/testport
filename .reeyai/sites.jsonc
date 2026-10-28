@@ -3,7 +3,7 @@
 	"sites": [
 		{
 			"key": "default",
-			"title": "WuppyCMS Demo",
+			"title": "port",
 			"root": ".",
 			"contentConfig": "src/content.config.ts",
 			"collections": ["blog", "authors"]
