@@ -1,26 +1,23 @@
 ---
 import { Icon } from "astro-icon/components";
 import Brand from "./Brand.astro";
-import CtaBanner from "./CtaBanner.astro";
 import { siteSettings } from "@/data/site";
 
-const quickLinks = [
-	["Ana Sayfa", "/"],
-	["Blog", "/blog"],
-	["Nasıl çalışır", "/#akis"],
-	["SSS", "/#sss"],
-	["İletişim", "/#iletisim"],
+const projectLinks = [
+	["Gece Vardiyası", "/projeler/gece-vardiyasi"],
+	["Tuz ve Toz", "/projeler/tuz-ve-toz"],
+	["İskele Sesleri", "/projeler/iskele-sesleri"],
+	["Tüm projeler", "/projeler"],
 ];
 
-const productLinks = [
-	["AI editör", "/#ozellikler"],
-	["Git içerik", "/#ozellikler"],
-	["Sayfa ağacı", "/#ozellikler"],
-	["Ekip akışı", "/#akis"],
+const siteLinks = [
+	["Hakkımda", "/hakkinda"],
+	["Hizmetler", "/#hizmetler"],
+	["Süreç", "/#surec"],
+	["SSS", "/#sss"],
+	["İletişim", "/iletisim"],
 ];
 ---
-
-<CtaBanner />
 
 <footer class="site-footer">
 	<div class="shell footer-grid">
@@ -28,47 +25,43 @@ const productLinks = [
 			<h2 class="sr-only" id="footer-brand-title">{siteSettings.brandName}</h2>
 			<Brand inverse />
 			<p>{siteSettings.description}</p>
-			<ul class="trust-list" aria-label="Ürün kapsamı">
-				<li>Git destekli içerik</li>
-				<li>AI + diff onayı</li>
-				<li>Astro + Tailwind 4</li>
+			<ul class="trust-list" aria-label="Çalışma biçimi">
+				<li>Uzun soluklu saha</li>
+				<li>Caption & arşiv düzeni</li>
+				<li>Yazılı kullanım lisansı</li>
 			</ul>
 			<ul class="social-list" aria-label="Sosyal medya hesapları">
 				<li>
-					<a aria-label="GitHub" href={siteSettings.github} target="_blank" rel="noreferrer">
-						<Icon name="simple-icons:github" size={16} />
+					<a aria-label="Instagram" href={siteSettings.instagram} target="_blank" rel="noreferrer">
+						<Icon name="simple-icons:instagram" size={16} />
 					</a>
 				</li>
 				<li>
-					<a aria-label="X" href="https://x.com" target="_blank" rel="noreferrer">
+					<a aria-label="X" href={siteSettings.x} target="_blank" rel="noreferrer">
 						<Icon name="simple-icons:x" size={16} />
 					</a>
 				</li>
 				<li>
-					<a aria-label="LinkedIn" href="https://linkedin.com" target="_blank" rel="noreferrer">
+					<a aria-label="LinkedIn" href={siteSettings.linkedin} target="_blank" rel="noreferrer">
 						<Icon name="simple-icons:linkedin" size={16} />
 					</a>
 				</li>
 			</ul>
 		</section>
 
-		<nav class="footer-column" aria-labelledby="footer-product-title">
-			<h3 id="footer-product-title">Ürün</h3>
+		<nav class="footer-column" aria-labelledby="footer-project-title">
+			<h3 id="footer-project-title">Projeler</h3>
 			<ul>
-				{productLinks.map(([label, href]) => <li><a href={href}>{label}</a></li>)}
+				{projectLinks.map(([label, href]) => <li><a href={href}>{label}</a></li>)}
 			</ul>
 		</nav>
 
-		<nav class="footer-column" aria-labelledby="footer-corporate-title">
-			<h3 id="footer-corporate-title">Kaynaklar</h3>
-			<ul>{quickLinks.map(([label, href]) => <li><a href={href}>{label}</a></li>)}</ul>
-			<p class="footer-group-title">Depo</p>
+		<nav class="footer-column" aria-labelledby="footer-site-title">
+			<h3 id="footer-site-title">Site</h3>
+			<ul>{siteLinks.map(([label, href]) => <li><a href={href}>{label}</a></li>)}</ul>
+			<p class="footer-group-title">Notlar</p>
 			<ul>
-				<li>
-					<a href={siteSettings.github} target="_blank" rel="noreferrer">
-						GitHub'da incele
-					</a>
-				</li>
+				<li><a href="/blog">Saha notları</a></li>
 			</ul>
 		</nav>
 
@@ -81,25 +74,25 @@ const productLinks = [
 				</a>
 				<div>
 					<Icon name="lucide:map-pin" size={16} />
-					<span><small>Konum</small>{siteSettings.location}</span>
+					<span><small>Üs</small>{siteSettings.location}</span>
 				</div>
 				<div>
 					<Icon name="lucide:clock-3" size={16} />
-					<span><small>Çalışma saatleri</small>{siteSettings.workHours}<small>Hafta sonu: e-posta</small></span>
+					<span><small>Uygunluk</small>{siteSettings.workHours}</span>
 				</div>
 			</address>
 		</section>
 	</div>
 
 	<div class="shell footer-bottom">
-		<p>© {new Date().getFullYear()} {siteSettings.brandName}. Tüm hakları saklıdır.</p>
+		<p>© {new Date().getFullYear()} {siteSettings.brandName}. Tüm fotoğrafların hakları saklıdır.</p>
 		<p class="footer-credit">
-			Tasarım &amp; Geliştirici: <a href="/" class="underline underline-offset-2 transition-colors hover:text-primary">WuppyCMS</a>
+			Fotoğraf &amp; site: <a href="/hakkinda" class="underline underline-offset-2 transition-colors hover:text-primary">Deniz Aksu</a>
 		</p>
 		<nav aria-label="Alt bağlantılar">
-			<a href="/blog">Blog</a>
-			<a href="/#sss">SSS</a>
-			<a href="/#iletisim">İletişim</a>
+			<a href="/projeler">Projeler</a>
+			<a href="/hakkinda">Hakkımda</a>
+			<a href="/iletisim">İletişim</a>
 		</nav>
 	</div>
 </footer>
