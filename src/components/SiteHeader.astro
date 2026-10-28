@@ -14,7 +14,7 @@ import {
 } from "@/ui/navigation-menu";
 
 const isActive = (href: string) => {
-	// Anchor bağlantıları (/#ozellikler gibi) sayfa yüklendiğinde aktif sayılmaz;
+	// Anchor bağlantıları (/#hizmetler gibi) sayfa yüklendiğinde aktif sayılmaz;
 	// aksi halde ana sayfada birden fazla menü öğesi altı çizili görünür.
 	if (href.includes("#")) return false;
 	if (href === "/") return Astro.url.pathname === "/";
@@ -28,10 +28,10 @@ const isActive = (href: string) => {
 	data-sticky="false"
 >
 	<!-- Üst bilgi çubuğu -->
-	<div class="hidden border-b border-white/10 bg-[#111111] text-white transition-all duration-200 lg:block group-data-[sticky=true]/header:hidden">
+	<div class="hidden border-b border-white/10 bg-[#0B0E11] text-white transition-all duration-200 lg:block group-data-[sticky=true]/header:hidden">
 		<div class="mx-auto flex min-h-9 w-[95vw] items-center justify-between px-2 text-xs">
 			<span class="font-medium text-white/70">
-				İçeriğiniz GitHub'da yaşasın. AI ile düzenleyin, commit ile yayınlayın.
+				Belgesel fotoğraf · Saha, seçki ve teslim. Şu an yeni proje alıyor.
 			</span>
 			<div class="flex h-9 items-stretch">
 				<a
@@ -41,12 +41,12 @@ const isActive = (href: string) => {
 					<Mail size={13} /> {siteSettings.email}
 				</a>
 				<a
-					href={siteSettings.github}
+					href={siteSettings.instagram}
 					target="_blank"
 					rel="noreferrer"
 					class="inline-flex items-center gap-2 border-l border-white/10 px-4 text-[11px] font-bold text-white/90 transition-colors hover:text-primary"
 				>
-					<Icon name="simple-icons:github" size={13} /> GitHub
+					<Icon name="simple-icons:instagram" size={13} /> Instagram
 				</a>
 				<span class="inline-flex items-center gap-1.5 border-l border-white/10 px-4 text-[11px] font-bold text-white/90">
 					TR <ChevronDown size={12} />
@@ -57,7 +57,7 @@ const isActive = (href: string) => {
 
 	<div class="py-2.5 transition-all duration-300">
 		<div
-			class="nav-shell mx-auto flex min-h-[4.5rem] w-[95vw] items-center justify-between border border-neutral-200/80 bg-white px-5 shadow-[0_8px_25px_rgba(0,0,0,0.06)] transition-all duration-300 group-data-[sticky=true]/header:border-white/12 group-data-[sticky=true]/header:bg-[#111111]/95 group-data-[sticky=true]/header:shadow-2xl group-data-[sticky=true]/header:backdrop-blur-md"
+			class="nav-shell mx-auto flex min-h-[4.5rem] w-[95vw] items-center justify-between border border-neutral-200/80 bg-white px-5 shadow-[0_8px_25px_rgba(0,0,0,0.06)] transition-all duration-300 group-data-[sticky=true]/header:border-white/12 group-data-[sticky=true]/header:bg-[#0B0E11]/95 group-data-[sticky=true]/header:shadow-2xl group-data-[sticky=true]/header:backdrop-blur-md"
 		>
 			<div class="shrink-0"><Brand /></div>
 
@@ -103,23 +103,23 @@ const isActive = (href: string) => {
 
 			<div class="flex items-center gap-2 lg:ml-0">
 				<a
-					class="hidden h-9 items-center gap-1.5 bg-primary px-3 text-[11px] font-black uppercase tracking-wider text-white shadow-sm transition hover:bg-black sm:inline-flex sm:h-10 sm:gap-2 sm:px-3.5 sm:text-xs"
-					href="/#iletisim"
+					class="hidden h-9 items-center gap-1.5 bg-primary px-3 text-[11px] font-black uppercase tracking-wider text-white shadow-sm transition hover:bg-neutral-950 sm:inline-flex sm:h-10 sm:gap-2 sm:px-3.5 sm:text-xs"
+					href="/iletisim"
 				>
-					<span class="grid size-4.5 place-items-center bg-black text-white sm:size-5">
+					<span class="grid size-4.5 place-items-center bg-neutral-950 text-white sm:size-5">
 						<ArrowRight size={12} class="sm:hidden" />
 						<ArrowRight size={13} class="hidden sm:block" />
 					</span>
-					<span>Demo talep et</span>
+					<span>Çekim talebi</span>
 				</a>
 				<a
 					class="icon-button hidden size-10 place-items-center border border-neutral-200 text-neutral-900 transition hover:border-primary hover:text-primary lg:grid group-data-[sticky=true]/header:border-white/20 group-data-[sticky=true]/header:text-white"
-					aria-label="GitHub deposu"
-					href={siteSettings.github}
+					aria-label="Instagram"
+					href={siteSettings.instagram}
 					target="_blank"
 					rel="noreferrer"
 				>
-					<Icon name="simple-icons:github" size={17} />
+					<Icon name="simple-icons:instagram" size={17} />
 				</a>
 				<a
 					class="icon-button hidden size-10 place-items-center border border-neutral-200 text-neutral-900 transition hover:border-primary hover:text-primary lg:grid group-data-[sticky=true]/header:border-white/20 group-data-[sticky=true]/header:text-white"
@@ -167,11 +167,10 @@ const isActive = (href: string) => {
 										</details>
 									) : (
 										<a
-											class="flex items-center justify-between border-b border-neutral-100 py-3 text-sm font-bold text-neutral-900 transition-colors hover:text-primary sm:py-3.5"
+											class="block border-b border-neutral-100 py-2.5 text-sm font-bold text-neutral-900 transition-colors hover:text-primary sm:py-3"
 											href={item.href}
 										>
-											<span>{item.label}</span>
-											<ArrowRight size={16} />
+											{item.label}
 										</a>
 									)}
 								</li>
@@ -179,16 +178,10 @@ const isActive = (href: string) => {
 						}
 					</ul>
 					<a
-						class="mt-4 flex items-center justify-between bg-primary p-3.5 text-xs font-black uppercase text-white shadow-sm transition-colors hover:bg-black"
-						href="/#iletisim"
+						class="mt-4 inline-flex w-full items-center justify-center gap-2 bg-primary px-5 py-3 text-xs font-black uppercase tracking-wider text-white"
+						href="/iletisim"
 					>
-						Demo talep et <ArrowRight size={16} />
-					</a>
-					<a
-						class="mt-2 flex items-center gap-2 border border-neutral-200 p-3 text-[11px] font-bold text-neutral-600 transition-colors hover:border-primary hover:text-primary"
-						href={`mailto:${siteSettings.email}`}
-					>
-						<Mail size={14} /> {siteSettings.email}
+						Çekim talebi <ArrowRight size={14} />
 					</a>
 				</nav>
 			</details>
