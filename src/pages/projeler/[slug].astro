@@ -1,0 +1,83 @@
+---
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "@lucide/astro";
+import Base from "@/layouts/Base.astro";
+import { projects, siteSettings } from "@/data/site";
+
+export function getStaticPaths() {
+	return projects.map((project, index) => ({
+		params: { slug: project.slug },
+		props: { project, next: projects[(index + 1) % projects.length] },
+	}));
+}
+
+const { project, next } = Astro.props;
+const tones = {
+	blue: "bg-primary text-white",
+	ink: "bg-[#0B0E11] text-white",
+	ash: "bg-neutral-100 text-neutral-950",
+};
+---
+
+<Base title={`${project.title} — ${siteSettings.brandName}`} description={project.summary}>
+	<main class="mx-auto w-[95vw] max-w-7xl pb-20 pt-10 sm:pt-14">
+		<a href="/projeler" class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-neutral-500 hover:text-primary">
+			<ArrowLeft size={14} /> Tüm projeler
+		</a>
+
+		<header class="mt-10 grid gap-8 border-b border-neutral-200 pb-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+			<div>
+				<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">{project.type} · {project.number}</p>
+				<h1 class="mt-3 text-[clamp(2.6rem,7vw,6rem)] font-black uppercase leading-[0.9] tracking-[-0.07em] text-neutral-950">{project.title}</h1>
+			</div>
+			<div class="grid grid-cols-3 gap-4 border-l border-neutral-200 pl-5 text-xs">
+				<div>
+					<p class="font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-500">Yer</p>
+					<p class="mt-2 font-bold text-neutral-950">{project.location}</p>
+				</div>
+				<div>
+					<p class="font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-500">Yıl</p>
+					<p class="mt-2 font-bold text-neutral-950">{project.year}</p>
+				</div>
+				<div>
+					<p class="font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-500">Kare</p>
+					<p class="mt-2 font-bold text-neutral-950">{project.frames}</p>
+				</div>
+			</div>
+		</header>
+
+		<div class="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+			<div class:list={[tones[project.tone], "relative flex min-h-[420px] flex-col justify-between overflow-hidden p-7 sm:min-h-[560px] sm:p-10"]}>
+				<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] [background-size:22px_22px] opacity-[0.16]" aria-hidden="true"></div>
+				<div class="relative flex items-center justify-between font-mono text-[10px] font-black uppercase tracking-[0.16em] opacity-70">
+					<span>{project.number}</span>
+					<span>{project.type}</span>
+				</div>
+				<p class="relative font-mono text-[clamp(3rem,9vw,8rem)] font-black leading-none tracking-[-0.1em] opacity-20">{project.number}</p>
+				<div class="relative">
+					<p class="max-w-lg text-lg font-medium leading-relaxed opacity-90">{project.summary}</p>
+				</div>
+			</div>
+
+			<div class="flex flex-col justify-between gap-10">
+				<div>
+					<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">Proje notu</p>
+					<p class="mt-4 text-base leading-relaxed text-neutral-700">{project.body}</p>
+				</div>
+				<div class="border-t border-neutral-200 pt-5">
+					<p class="text-xs leading-relaxed text-neutral-500">Bu proje hakkında daha fazla bilgi, baskı veya lisans için doğrudan yazabilirsin.</p>
+					<a href={`mailto:${siteSettings.email}`} class="mt-4 inline-flex items-center gap-2 bg-neutral-950 px-5 py-3 text-xs font-black uppercase tracking-wider text-white transition-colors hover:bg-primary">
+						İletişim <ArrowUpRight size={15} />
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<a href={`/projeler/${next.slug}`} class="group mt-12 flex items-center justify-between border-y border-neutral-200 py-6">
+			<div>
+				<p class="font-mono text-[10px] font-black uppercase tracking-[0.16em] text-primary">Sıradaki proje</p>
+				<p class="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-neutral-950 group-hover:text-primary">{next.title}</p>
+			</div>
+			<ArrowRight size={24} class="text-neutral-400 transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+		</a>
+	</main>
+</Base>

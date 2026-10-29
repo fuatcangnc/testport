@@ -1,0 +1,97 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+import Base from "@/layouts/Base.astro";
+import {
+	aboutHighlights,
+	clients,
+	equipment,
+	exhibitions,
+	siteSettings,
+	stats,
+} from "@/data/site";
+---
+
+<Base title={`Hakkımda — ${siteSettings.brandName}`} description={siteSettings.description}>
+	<main class="mx-auto w-[95vw] max-w-7xl pb-20 pt-10 sm:pt-14">
+		<div class="grid gap-10 border-b border-neutral-200 pb-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+			<div>
+				<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">Hakkımda</p>
+				<h1 class="mt-3 max-w-4xl text-[clamp(2.8rem,7vw,6rem)] font-black uppercase leading-[0.9] tracking-[-0.07em] text-neutral-950">
+					Uzun soluklu <span class="text-primary">saha</span>, net bir bakış.
+				</h1>
+			</div>
+			<p class="max-w-md text-base leading-relaxed text-neutral-700">
+				12 yıldır belgesel fotoğraf üzerine çalışıyorum. İstanbul ve Berlin arasında yaşıyor; uzun soluklu projeler, editoryal işler ve saha notları üretiyorum.
+			</p>
+		</div>
+
+		<dl class="mt-8 grid grid-cols-2 border-l border-t border-neutral-200 sm:grid-cols-4">
+			{
+				stats.map((item) => (
+					<div class="border-b border-r border-neutral-200 p-5">
+						<dt class="font-mono text-[9px] font-black uppercase tracking-[0.14em] text-neutral-500">{item.label}</dt>
+						<dd class="mt-2 font-mono text-3xl font-black tracking-[-0.08em] text-neutral-950">{item.value}</dd>
+					</div>
+				))
+			}
+		</dl>
+
+		<section class="mt-16 grid gap-4 sm:grid-cols-3">
+			{
+				aboutHighlights.map((item, index) => (
+					<div class="border border-neutral-200 p-6">
+						<span class="font-mono text-[10px] font-black text-primary">0{index + 1}</span>
+						<h2 class="mt-8 text-lg font-black uppercase tracking-[-0.03em] text-neutral-950">{item.title}</h2>
+						<p class="mt-3 text-sm leading-relaxed text-neutral-600">{item.description}</p>
+					</div>
+				))
+			}
+		</section>
+
+		<section class="mt-16 grid gap-10 border-t border-neutral-200 pt-10 lg:grid-cols-2">
+			<div>
+				<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">Ekipman</p>
+				<h2 class="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-neutral-950">Sahada yanımda olanlar.</h2>
+				<dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200">
+					{equipment.map(([label, value]) => (
+						<div class="flex items-baseline justify-between gap-4 py-3 text-sm">
+							<dt class="font-mono text-[10px] font-black uppercase tracking-[0.14em] text-neutral-500">{label}</dt>
+							<dd class="text-right font-semibold text-neutral-800">{value}</dd>
+						</div>
+					))}
+				</dl>
+			</div>
+
+			<div>
+				<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">Birlikte çalıştıklarım</p>
+				<h2 class="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-neutral-950">Yayınlar ve kurumlar.</h2>
+				<ul class="mt-6 grid grid-cols-2 gap-px bg-neutral-200 border border-neutral-200">
+					{clients.map((client) => <li class="bg-white p-4 text-sm font-bold text-neutral-800">{client}</li>)}
+				</ul>
+			</div>
+		</section>
+
+		<section class="mt-16">
+			<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">Sergiler & yayınlar</p>
+			<h2 class="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-neutral-950">Son görünürlükler.</h2>
+			<div class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200">
+				{
+					exhibitions.map((item) => (
+						<div class="grid gap-2 py-4 sm:grid-cols-[80px_1fr_1fr] sm:items-baseline">
+							<span class="font-mono text-xs font-black text-primary">{item.year}</span>
+							<span class="text-sm font-black uppercase tracking-wide text-neutral-950">{item.title}</span>
+							<span class="text-sm text-neutral-600">{item.place} <span class="text-neutral-400">·</span> {item.note}</span>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<div class="mt-12 flex flex-wrap items-center justify-between gap-4 border border-neutral-950 bg-neutral-950 p-6 text-white sm:p-8">
+			<p class="max-w-xl text-lg font-black uppercase tracking-[-0.03em]">Bir sonraki hikâye için saha planlayalım.</p>
+			<a href={`mailto:${siteSettings.email}`} class="inline-flex items-center gap-2 bg-primary px-5 py-3 text-xs font-black uppercase tracking-wider text-white hover:bg-primary-dark">
+				{siteSettings.email} <ArrowUpRight size={15} />
+			</a>
+		</div>
+	</main>
+</Base>

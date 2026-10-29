@@ -1,23 +1,16 @@
 ---
-import { Icon } from "astro-icon/components";
-import { ArrowRight, Check, FileCode2, ShieldCheck, Sparkles } from "@lucide/astro";
-import { getCollection } from "astro:content";
+import { ArrowRight, ArrowUpRight, Mail, MapPin } from "@lucide/astro";
 import Base from "@/layouts/Base.astro";
-import HeroPipeline from "@/components/HeroPipeline.astro";
-import FeatureCarousel from "@/components/FeatureCarousel.astro";
-import Pillars from "@/components/Pillars.astro";
-import SupportedContent from "@/components/SupportedContent.astro";
-import WhyChooseUs from "@/components/WhyChooseUs.astro";
-import ProcessSection from "@/components/ProcessSection.astro";
-import UseCases from "@/components/UseCases.astro";
-import LatestPosts from "@/components/LatestPosts.astro";
-import ContactSection from "@/components/ContactSection.astro";
-import SiteFaq from "@/components/SiteFaq.astro";
-import { siteSettings } from "@/data/site";
-
-const posts = (await getCollection("blog", ({ data }) => !data.draft))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 3);
+import ProjectCard from "@/components/ProjectCard.astro";
+import {
+	aboutHighlights,
+	faqs,
+	featuredProjects,
+	processSteps,
+	services,
+	siteSettings,
+	stats,
+} from "@/data/site";
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -30,139 +23,189 @@ const jsonLd = {
 			"description": siteSettings.description,
 		},
 		{
-			"@type": "SoftwareApplication",
-			"name": siteSettings.brandName,
-			"applicationCategory": "ContentManagementApplication",
-			"operatingSystem": "Web",
-			"description": siteSettings.description,
+			"@type": "Person",
+			"name": "Deniz Aksu",
+			"jobTitle": "Belgesel fotoğrafçı",
+			"email": siteSettings.email,
+			"address": siteSettings.location,
 		},
 	],
 };
 ---
 
-<Base
-	title={`${siteSettings.brandName} — ${siteSettings.tagline}`}
-	description={siteSettings.description}
->
+<Base title={`${siteSettings.brandName} — ${siteSettings.tagline}`} description={siteSettings.description}>
 	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-	<main class="home">
-		<!-- Hero -->
-		<section class="mb-8 py-4 sm:mb-12 sm:py-6 lg:mb-16 lg:py-8">
-			<div class="mx-auto w-[95vw]">
-				<div
-					class="relative isolate flex min-h-[580px] items-center overflow-hidden rounded-none border border-neutral-300 bg-white px-6 py-12 text-black shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] sm:min-h-[640px] sm:px-12 sm:py-16 lg:min-h-[700px] lg:px-16 lg:py-20"
-				>
-					<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(#e5e5e5_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-70" aria-hidden="true"></div>
-					<div class="pointer-events-none absolute -right-20 -top-20 -z-10 size-96 rounded-full bg-primary/5 blur-3xl" aria-hidden="true"></div>
-					<div class="pointer-events-none absolute -bottom-20 -left-20 -z-10 size-96 rounded-full bg-neutral-900/5 blur-3xl" aria-hidden="true"></div>
+	<main class="mx-auto w-[95vw] max-w-7xl pb-20 pt-8 sm:pt-12">
+		<section class="grid gap-10 border-b border-neutral-200 pb-12 lg:grid-cols-[1.35fr_0.65fr] lg:items-end lg:gap-16 lg:pb-16">
+			<div>
+				<p class="inline-flex items-center gap-2 border border-neutral-300 bg-neutral-100 px-3 py-1.5 font-mono text-[10px] font-black uppercase tracking-[0.16em] text-neutral-900">
+					<span class="size-1.5 animate-pulse rounded-full bg-primary"></span>
+					Belgesel fotoğraf · İstanbul / Berlin
+				</p>
 
-					<div class="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-16">
-						<div class="w-full" data-reveal>
-							<div class="inline-flex items-center gap-2.5 border border-neutral-300 bg-neutral-100 px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-black shadow-2xs sm:text-xs">
-								<span class="size-2 animate-pulse rounded-full bg-primary"></span>
-								<span>Git tabanlı içerik yönetimi</span>
-							</div>
+				<h1 class="mt-6 max-w-4xl text-[clamp(2.6rem,7vw,6.4rem)] font-black uppercase leading-[0.9] tracking-[-0.07em] text-neutral-950">
+					Görünenin <span class="text-primary">ardındaki</span> zaman.
+				</h1>
 
-							<h1 class="mt-5 break-words text-[1.55rem] font-black uppercase leading-[1.1] tracking-[-0.03em] text-black sm:text-4xl md:text-5xl lg:text-[44px]">
-								<span class="text-primary">İçeriğiniz GitHub'da</span> yaşasın.{" "}
-								<br class="hidden sm:block" />
-								<span class="text-primary">AI ile düzenleyin.</span>
-							</h1>
+				<p class="mt-6 max-w-2xl text-base font-medium leading-relaxed text-neutral-700 sm:text-lg">
+					{siteSettings.description}
+				</p>
 
-							<p class="mt-4 max-w-2xl text-base font-medium leading-relaxed text-neutral-800 sm:text-lg lg:max-w-3xl">
-								WuppyCMS; Astro sitenizi GitHub deposuna bağlar, AI ile içerik düzenlemenizi
-								sağlar ve her değişikliği gerçek bir commit olarak saklar. Veritabanı kilidi
-								yok, vendor lock-in yok.
-							</p>
+				<div class="mt-8 flex flex-wrap gap-3">
+					<a
+						href="/projeler"
+						class="inline-flex min-h-12 items-center gap-2 bg-neutral-950 px-6 text-xs font-black uppercase tracking-wider text-white transition-colors hover:bg-primary"
+					>
+						Projeleri gör <ArrowRight size={16} />
+					</a>
+					<a
+						href="/iletisim"
+						class="inline-flex min-h-12 items-center gap-2 border border-neutral-300 px-6 text-xs font-black uppercase tracking-wider text-neutral-950 transition-colors hover:border-primary hover:text-primary"
+					>
+						İletişim <ArrowUpRight size={16} />
+					</a>
+				</div>
 
-							<div class="mt-7 grid max-w-xl grid-cols-1 gap-5 border-y border-neutral-200 py-5 sm:grid-cols-3 sm:gap-6">
-								<div>
-									<strong class="block text-2xl font-black tracking-tight text-black sm:text-3xl">Git</strong>
-									<span class="text-[11px] font-bold uppercase tracking-wider text-neutral-600 sm:text-xs">İçerik repoda yaşar</span>
-								</div>
-								<div class="sm:border-l sm:border-neutral-200 sm:pl-6">
-									<strong class="block text-2xl font-black tracking-tight text-black sm:text-3xl">AI</strong>
-									<span class="text-[11px] font-bold uppercase tracking-wider text-neutral-600 sm:text-xs">Diff onayı ile</span>
-								</div>
-								<div class="sm:border-l sm:border-neutral-200 sm:pl-6">
-									<strong class="block text-2xl font-black tracking-tight text-primary sm:text-3xl">1 Panel</strong>
-									<span class="text-[11px] font-bold uppercase tracking-wider text-neutral-600 sm:text-xs">Sayfa, blog, medya</span>
-								</div>
-							</div>
+				<div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-bold text-neutral-500">
+					<a class="inline-flex items-center gap-2 hover:text-primary" href={`mailto:${siteSettings.email}`}>
+						<Mail size={14} /> {siteSettings.email}
+					</a>
+					<span class="inline-flex items-center gap-2">
+						<MapPin size={14} /> {siteSettings.location}
+					</span>
+				</div>
+			</div>
 
-							<div class="mt-7 flex flex-wrap items-center gap-4">
-								<a
-									href="/#iletisim"
-									class="group inline-flex items-center justify-center gap-3 bg-primary px-8 py-4.5 text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-[1.02] hover:bg-[#b84d12] sm:text-[13px]"
-								>
-									<span>Demo talep et</span>
-									<ArrowRight size={16} class="transition-transform group-hover:translate-x-1" />
-								</a>
-								<a
-									href={siteSettings.github}
-									target="_blank"
-									rel="noreferrer"
-									class="group inline-flex items-center justify-center gap-3 border-2 border-black bg-white px-8 py-4.5 text-xs font-black uppercase tracking-wider text-black shadow-sm transition-all duration-300 hover:scale-[1.02] hover:bg-black hover:text-white sm:text-[13px]"
-								>
-									<Icon name="simple-icons:github" size={16} />
-									<span>GitHub'da incele</span>
-									<ArrowRight size={16} class="transition-transform group-hover:translate-x-1" />
-								</a>
-							</div>
-
-							<a
-								href="/blog"
-								class="mt-7 inline-flex items-center gap-3.5 border border-neutral-300 bg-white p-3 text-black shadow-2xs transition hover:border-primary/60 hover:shadow-md"
-							>
-								<span class="grid size-10 place-items-center border border-neutral-300 bg-neutral-100 text-primary">
-									<FileCode2 size={22} />
-								</span>
-								<div class="text-left leading-tight">
-									<div class="flex items-center gap-2 text-sm font-black text-black">
-										<span>Astro + Tailwind 4</span>
-										<span class="text-primary">Bejamas UI</span>
-									</div>
-									<p class="mt-0.5 text-xs font-medium text-neutral-600">Şablonu ve blogu inceleyin</p>
-								</div>
-							</a>
+			<dl class="grid grid-cols-2 border-l border-t border-neutral-200">
+				{
+					stats.map((item) => (
+						<div class="border-b border-r border-neutral-200 p-5 sm:p-6">
+							<dt class="font-mono text-[10px] font-black uppercase tracking-[0.16em] text-neutral-500">{item.label}</dt>
+							<dd class="mt-3 font-mono text-4xl font-black tracking-[-0.08em] text-neutral-950 sm:text-5xl">{item.value}</dd>
+							<p class="mt-2 text-xs leading-relaxed text-neutral-500">{item.description}</p>
 						</div>
+					))
+				}
+			</dl>
+		</section>
 
-						<div class="relative mt-8 w-full max-w-[620px] space-y-4 lg:mt-0 lg:max-w-none" data-reveal>
-							<HeroPipeline />
+		<section class="mt-14 sm:mt-20">
+			<div class="flex flex-wrap items-end justify-between gap-4 border-b border-neutral-200 pb-5">
+				<div>
+					<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">01 — Seçili işler</p>
+					<h2 class="mt-2 text-3xl font-black uppercase tracking-[-0.04em] text-neutral-950 sm:text-4xl">Sahadan dört hikâye.</h2>
+				</div>
+				<a href="/projeler" class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-neutral-950 hover:text-primary">
+					Tüm projeler <ArrowRight size={15} />
+				</a>
+			</div>
 
-							<div class="grid w-fit grid-cols-1 gap-2.5 text-xs font-bold text-neutral-800 sm:grid-cols-[auto_auto] sm:text-[13px]">
-								<span class="flex w-full items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3.5 py-2 shadow-xs transition-all hover:border-neutral-300">
-									<ShieldCheck size={15} class="shrink-0 text-primary stroke-[2.2]" />
-									<span>Git destekli içerik</span>
-								</span>
-								<span class="flex w-full items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3.5 py-2 shadow-xs transition-all hover:border-neutral-300">
-									<Sparkles size={15} class="shrink-0 text-primary stroke-[2.2]" />
-									<span>AI önerisi, diff onayı</span>
-								</span>
-								<span class="flex w-full items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3.5 py-2 shadow-xs transition-all hover:border-neutral-300">
-									<Check size={15} class="shrink-0 text-primary stroke-[2.8]" />
-									<span>SHA çakışma kontrolü</span>
-								</span>
-								<span class="flex w-full items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3.5 py-2 shadow-xs transition-all hover:border-neutral-300">
-									<Check size={15} class="shrink-0 text-primary stroke-[2.8]" />
-									<span>Cloudflare dağıtımı</span>
-								</span>
+			<div class="mt-6 grid gap-4 sm:grid-cols-2">
+				{featuredProjects.map((project, index) => <ProjectCard project={project} index={index} large={index === 0} />)}
+			</div>
+		</section>
+
+		<section id="hizmetler" class="mt-16 sm:mt-24">
+			<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">02 — Hizmetler</p>
+			<div class="mt-2 flex flex-wrap items-end justify-between gap-4 border-b border-neutral-200 pb-5">
+				<h2 class="max-w-2xl text-3xl font-black uppercase tracking-[-0.04em] text-neutral-950 sm:text-4xl">Fotoğrafı bir teslim değil, bir süreç olarak kurarım.</h2>
+				<p class="max-w-sm text-sm leading-relaxed text-neutral-500">Saha, seçki, metin ve teslim aynı masada. İşin boyutu kadar süre ayırırım.</p>
+			</div>
+
+			<div class="mt-6 grid gap-4 sm:grid-cols-2">
+				{
+					services.map((service) => (
+						<article class:list={["border p-6 transition-colors", service.accent ? "border-primary bg-primary/5" : "border-neutral-200 bg-white hover:border-primary"]}>
+							<div class="flex items-start justify-between gap-4">
+								<span class="font-mono text-xs font-black text-primary">{service.number}</span>
+								<span class="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-neutral-500">{service.meta}</span>
 							</div>
-						</div>
-					</div>
+							<h3 class="mt-6 text-xl font-black uppercase tracking-[-0.03em] text-neutral-950">{service.title}</h3>
+							<p class="mt-3 text-sm leading-relaxed text-neutral-600">{service.lede}</p>
+							<ul class="mt-5 space-y-2 border-t border-neutral-200 pt-4 text-xs font-semibold text-neutral-700">
+								{service.items.map((item) => <li class="flex gap-2"><span class="text-primary">+</span>{item}</li>)}
+							</ul>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="mt-16 border border-neutral-950 bg-neutral-950 p-6 text-white sm:mt-24 sm:p-10 lg:p-12">
+			<div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+				<div>
+					<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">03 — Yaklaşım</p>
+					<h2 class="mt-3 max-w-xl text-3xl font-black uppercase leading-[1.02] tracking-[-0.04em] sm:text-4xl">Bir hikâye bir günde anlatılmaz.</h2>
+					<p class="mt-5 max-w-md text-sm leading-relaxed text-white/60">Aynı yere dönmek, insanların fotoğrafa alışmasını ve gerçek anların görünmesini sağlar.</p>
+					<a href="/hakkinda" class="mt-7 inline-flex items-center gap-2 border border-white/20 px-5 py-3 text-xs font-black uppercase tracking-wider text-white transition-colors hover:border-primary hover:text-primary">
+						Hakkımda <ArrowUpRight size={15} />
+					</a>
+				</div>
+				<div class="grid gap-px bg-white/10 sm:grid-cols-3">
+					{
+						aboutHighlights.map((item, index) => (
+							<div class="bg-neutral-950 p-5">
+								<span class="font-mono text-[10px] text-primary">0{index + 1}</span>
+								<h3 class="mt-8 text-sm font-black uppercase tracking-wide text-white">{item.title}</h3>
+								<p class="mt-2 text-xs leading-relaxed text-white/55">{item.description}</p>
+							</div>
+						))
+					}
 				</div>
 			</div>
 		</section>
 
-		<FeatureCarousel />
-		<Pillars />
-		<SupportedContent />
-		<WhyChooseUs />
-		<ProcessSection />
-		<UseCases />
-		<LatestPosts posts={posts} />
-		<ContactSection />
-		<SiteFaq />
+		<section id="surec" class="mt-16 sm:mt-24">
+			<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">04 — Süreç</p>
+			<h2 class="mt-2 border-b border-neutral-200 pb-5 text-3xl font-black uppercase tracking-[-0.04em] text-neutral-950 sm:text-4xl">Brieften baskıya, dört adım.</h2>
+			<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+				{
+					processSteps.map((step) => (
+						<div class="border border-neutral-200 p-5">
+							<span class="font-mono text-xs font-black text-primary">{step.number}</span>
+							<h3 class="mt-8 text-base font-black uppercase tracking-[-0.02em] text-neutral-950">{step.title}</h3>
+							<p class="mt-2 text-xs leading-relaxed text-neutral-600">{step.description}</p>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<section id="sss" class="mt-16 sm:mt-24">
+			<div class="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+				<div>
+					<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">05 — Sık sorulanlar</p>
+					<h2 class="mt-2 text-3xl font-black uppercase tracking-[-0.04em] text-neutral-950 sm:text-4xl">İşe başlamadan önce.</h2>
+					<p class="mt-4 max-w-xs text-sm leading-relaxed text-neutral-500">Aradığın cevap yoksa doğrudan yaz; genellikle aynı gün dönüyorum.</p>
+				</div>
+				<div class="divide-y divide-neutral-200 border-y border-neutral-200">
+					{
+						faqs.map(([question, answer]) => (
+							<details class="group py-4">
+								<summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-sm font-black uppercase tracking-wide text-neutral-950">
+									<span>{question}</span>
+									<span class="mt-0.5 text-primary transition-transform group-open:rotate-45">+</span>
+								</summary>
+								<p class="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600">{answer}</p>
+							</details>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section id="iletisim" class="mt-16 border-t border-neutral-200 pt-10 sm:mt-24">
+			<div class="flex flex-wrap items-end justify-between gap-6">
+				<div>
+					<p class="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-primary">06 — İletişim</p>
+					<h2 class="mt-2 max-w-2xl text-3xl font-black uppercase tracking-[-0.04em] text-neutral-950 sm:text-5xl">Yeni bir hikâye için yaz.</h2>
+					<p class="mt-4 text-sm text-neutral-500">Brief, takvim veya sadece bir fikir — hepsi olur.</p>
+				</div>
+				<a href={`mailto:${siteSettings.email}`} class="inline-flex items-center gap-2 bg-primary px-6 py-4 text-xs font-black uppercase tracking-wider text-white transition-colors hover:bg-primary-dark">
+					{siteSettings.email} <ArrowUpRight size={16} />
+				</a>
+			</div>
+		</section>
 	</main>
 </Base>
