@@ -1,12 +1,12 @@
 {
-	// WuppyCMS site tanımları — CMS bu dosyayı okur. Elle de düzenlenebilir.
+	"version": 1,
 	"sites": [
 		{
-			"key": "default",
-			"title": "port",
+			"key": "root",
+			"name": "port",
 			"url": "http://localhost:4325",
-			"root": ".",
-			"contentConfig": "src/content.config.ts",
+			"media": "public",
+			"publishing": "review",
 			"collections": ["blog", "authors"]
 		}
 	]
