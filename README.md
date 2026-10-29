@@ -16,7 +16,7 @@ keskin köşe ve endüstriyel dot-matrix detayları.
 | `src/content/blog/*.mdx` | Blog yazıları (frontmatter + MDX gövde) |
 | `src/content/authors/*.md` | Yazarlar |
 | `src/content.config.ts` | Zod şemaları — koleksiyonların gerçek kaynağı |
-| `.reeyai/sites.jsonc` | Site tanımları (CMS buradan okur) |
+| `.wuppycms/sites.jsonc` | Site tanımları (CMS buradan okur) |
 | `.github/workflows/build.yml` | CI: her push'ta `pnpm build` |
 | `src/ui/*` | Bejamas UI primitifleri (navigation-menu, accordion, tabs, carousel) |
 | `src/components/*` | Header, footer, hero pipeline, paneller, süreç, blog kartları |
